@@ -1,0 +1,41 @@
+! real kind precision parameters
+integer, parameter :: sp = selected_real_kind(6, 37)
+integer, parameter :: dp = selected_real_kind(15, 307)
+
+! pi
+real, parameter :: pi = 3.14159265
+
+logical :: first_read = .TRUE.
+
+! coordinates
+real(dp), dimension(:), allocatable :: x, y, z
+
+! bin widths, histogram normalisation
+real(dp) :: binwidth, hdistnrm
+
+! bin number
+integer(8) :: nbins
+
+! axis id (x(1), y(2), z(3))
+integer(4) :: axisid
+
+! box lengths
+real(dp) :: xmin, xmax, ymin, ymax, zmin, zmax, Lx, Ly, Lz
+
+! index and types for atoms
+integer(8), dimension(:), allocatable :: nindex, atomtype
+
+! height distribution
+real(dp), dimension(:,:), allocatable :: hdist
+
+! trajectory numbers, timestep, number of total frames, number of frames to skip, number of frames to calculate, 
+integer(8) :: timestep, natom, nframe, nskip, nframecalc, nanalyse, ntypes
+
+! system numbers
+integer(8) :: ntotal
+
+! input, trajectory, and mass file names
+character(LEN=80) :: inputfile, outputfile, trajfile
+
+! storing strings in the LAMMPS dump file headers
+character(LEN=80), dimension(4) :: headertext
