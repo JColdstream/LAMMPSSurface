@@ -7,8 +7,8 @@ real, parameter :: pi = 3.14159265
 
 logical :: first_read = .TRUE.
 
-! coordinates
-real(dp), dimension(:), allocatable :: x, y, z
+! coordinates, masses
+real(dp), dimension(:), allocatable :: x, y, z, mass
 
 ! bin widths, histogram normalisation
 real(dp) :: binwidth, hdistnrm
@@ -35,7 +35,7 @@ integer(8) :: timestep, natom, nframe, nskip, nframecalc, nanalyse, ntypes
 integer(8) :: ntotal
 
 ! input, trajectory, and mass file names
-character(LEN=80) :: inputfile, outputfile, trajfile
+character(LEN=80) :: inputfile, outputfile, trajfile, massfile
 
 ! storing strings in the LAMMPS dump file headers
 character(LEN=80), dimension(4) :: headertext

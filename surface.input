@@ -1,10 +1,11 @@
 ! Input file for analysis.f90
 
-npt.e1812.lammpstrj             LAMMPS trajectory file
+../LAMMPSSurface/npt.e1812.lammpstrj
 hdist.dat                       Output file name
+masses.in                       Mass file (copy from LAMMPS data file)
 500                             Number of frames in trajectory 
 400                             Skip frames
 37620                           Total number of atoms in system
 16                              Number of atom types
 1                               Bin width
-2                               Axis (x(1), y(2), z(3)) calculates density along this axis
+3                               Axis (x(1), y(2), z(3)) calculates density along this axis

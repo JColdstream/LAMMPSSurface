@@ -31,6 +31,8 @@ allocate(x(ntotal))
 allocate(y(ntotal))
 allocate(z(ntotal))
 
+call readmasses
+
 ! open lammps trajectory file
 open(11, file = trajfile, status='old')
 
@@ -47,8 +49,9 @@ subroutine readinput
 open(10, file = inputfile, status='old')
 read(10, *)
 read(10, *)
-read(10, *) trajfile
+read(10, '(a)') trajfile
 read(10, *) outputfile
+read(10, *) massfile
 read(10, *) nframe
 read(10, *) nskip
 read(10, *) ntotal
@@ -76,6 +79,20 @@ do i = 1, nskip*(ntotal+9)
 enddo
 write(*,*) "SKIPPED FRAMES : ", nskip
 end subroutine skipframe
+
+subroutine readmasses
+  integer(sp):: i, j
+
+  allocate(mass(ntypes))
+
+  open(12, file = massfile, status='old')
+  read(12, *)
+  read(12, *)
+  do i = 1, ntypes
+    read(12, *) j, mass(i)
+    write(*,*) j, mass(i)
+  enddo
+end subroutine readmasses
 
 ! reads in box length, timestep and natoms from the LAMMPS trajectory headers
 subroutine readheader
@@ -144,16 +161,24 @@ end subroutine heightdistribution
 subroutine distribution_output
   integer(8):: i, j
   real(dp):: binvolume
+  open(unit = 101, file='conc.dat', status='unknown')
+  open(unit = 102, file='density.dat', status='unknown')
   if (axisid .eq. 1) then
     binvolume = Ly*Lz*binwidth
+    write(101, *) '#  x', ('    ', j, j = 1, ntypes)
+    write(102, *) '#  x', ('    ', j, j = 1, ntypes)
   else if (axisid .eq. 2) then
     binvolume = Lx*Lz*binwidth
+    write(101, *) '#  y', ('    ', j, j = 1, ntypes)
+    write(102, *) '#  y', ('    ', j, j = 1, ntypes)
   else if (axisid .eq. 3) then
     binvolume = Lx*Ly*binwidth
+    write(101, *) '#  z', ('    ', j, j = 1, ntypes)
+    write(102, *) '#  z', ('    ', j, j = 1, ntypes)
   endif
-  open(unit = 101, file = outputfile, status='unknown')
   do i = 1, nbins
     write(101, *) (binwidth*(dble(i)-0.5)), (hdist(j, i)/binvolume/hdistnrm, j = 1, ntypes)
+    write(102, *) (binwidth*(dble(i)-0.5)), (hdist(j, i)*mass(j)/binvolume/hdistnrm, j = 1, ntypes)
   enddo
 end subroutine distribution_output
 
