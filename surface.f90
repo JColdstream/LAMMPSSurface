@@ -106,18 +106,18 @@ read(11, *) ymin, ymax
 read(11, *) zmin, zmax
 read(11, *) headertext(4)
 
-Lx = xmin-xmax
-Ly = ymin-ymax
-Lz = zmin-zmax
+Lx = xmax-xmin
+Ly = ymax-ymin
+Lz = zmax-zmin
 
 !if(natom  .ne. ntotal) stop 'mismatched number of atoms'
 if (first_read) then
   if (axisid .eq. 1) then
-    nbins = (xmax-xmin)/binwidth+1
+    nbins = int((xmax-xmin)/binwidth)+1
   else if (axisid .eq. 2) then
-    nbins = (ymax-ymin)/binwidth+1
+    nbins = int((ymax-ymin)/binwidth)+1
   else if (axisid .eq. 3) then
-    nbins = (zmax-zmin)/binwidth+1
+    nbins = int((zmax-zmin)/binwidth)+1
   endif
   allocate(hdist(ntypes, nbins))
   hdist = 0.0
@@ -141,17 +141,17 @@ subroutine heightdistribution
 integer(8):: i, hbin
 if (axisid .eq. 1) then
   do i = 1, ntotal
-    hbin = int(x(i) + 1.0)
+    hbin = int(x(i)/binwidth+1.0)
     hdist(atomtype(i), hbin) = hdist(atomtype(i), hbin) + 1.0
   enddo
 else if (axisid .eq. 2) then
   do i = 1, ntotal
-    hbin = int(y(i) + 1.0)
+    hbin = int(y(i)/binwidth+1.0)
     hdist(atomtype(i), hbin) = hdist(atomtype(i), hbin) + 1.0
   enddo
 else if (axisid .eq. 3) then
   do i = 1, ntotal
-    hbin = int(z(i) + 1.0)
+    hbin = int(z(i)/binwidth+1.0)
     hdist(atomtype(i), hbin) = hdist(atomtype(i), hbin) + 1.0
   enddo
 endif
