@@ -61,7 +61,6 @@ read(inputf, *) outputfile
 read(inputf, *) massfile
 read(inputf, *) nframe
 read(inputf, *) nskip
-read(inputf, *) ntotal
 read(inputf, *) ntypes
 read(inputf, *) binwidth
 read(inputf, *) axisid
