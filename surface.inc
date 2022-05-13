@@ -19,7 +19,7 @@ integer(8) :: nbins
 ! axis id (x(1), y(2), z(3))
 integer(4) :: axisid
 
-! box lengths
+! box length
 real(dp) :: xmin, xmax, ymin, ymax, zmin, zmax, Lx, Ly, Lz
 
 ! index and types for atoms
@@ -33,6 +33,9 @@ integer(8) :: timestep, natom, nframe, nskip, nframecalc, nanalyse, ntypes
 
 ! system numbers
 integer(8) :: ntotal
+
+! file unit numbers
+integer(8) :: inputf=10, trajf=11, massf=12, concf=20, densf=21
 
 ! input, trajectory, and mass file names
 character(LEN=80) :: inputfile, outputfile, trajfile, massfile
