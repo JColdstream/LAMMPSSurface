@@ -107,7 +107,7 @@ subroutine readheader
 read(trajf, *) headertext(1)   
 read(trajf, *) timestep
 read(trajf, *) headertext(2)
-read(trajf, *) natom
+read(trajf, *) ntotal
 read(trajf, *) headertext(3)
 read(trajf, *) xmin, xmax
 read(trajf, *) ymin, ymax

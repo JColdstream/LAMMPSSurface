@@ -29,7 +29,7 @@ integer(8), dimension(:), allocatable :: nindex, atomtype
 real(dp), dimension(:,:), allocatable :: hdist
 
 ! trajectory numbers, timestep, number of total frames, number of frames to skip, number of frames to calculate, 
-integer(8) :: timestep, natom, nframe, nskip, nframecalc, nanalyse, ntypes
+integer(8) :: timestep, nframe, nskip, nframecalc, nanalyse, ntypes
 
 ! system numbers
 integer(8) :: ntotal
