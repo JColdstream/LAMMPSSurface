@@ -10,6 +10,9 @@ logical :: first_read = .TRUE.
 ! coordinates, masses
 real(dp), dimension(:), allocatable :: x, y, z, mass
 
+! scattering lengths
+real (dp), dimension(:), allocatable :: b
+
 ! bin widths, histogram normalisation
 real(dp) :: binwidth, hdistnrm
 
@@ -17,7 +20,10 @@ real(dp) :: binwidth, hdistnrm
 integer(8) :: nbins
 
 ! axis id (x(1), y(2), z(3))
-integer(4) :: axisid
+integer(4) :: axisid, fractional_coords
+
+! fractional or absolute coordinates
+logical :: fractional_bool
 
 ! box length
 real(dp) :: xmin, xmax, ymin, ymax, zmin, zmax, Lx, Ly, Lz
@@ -35,10 +41,10 @@ integer(8) :: timestep, nframe, nskip, nframecalc, nanalyse, ntypes
 integer(8) :: ntotal
 
 ! file unit numbers
-integer(8) :: inputf=10, trajf=11, massf=12, concf=20, densf=21
+integer(8) :: inputf=10, trajf=11, massf=12, scatf=13, concf=20, densf=21, sldf=22
 
 ! input, trajectory, and mass file names
-character(LEN=80) :: inputfile, outputfile, trajfile, massfile
+character(LEN=80) :: inputfile, trajfile, massfile, scatteringfile
 
 ! storing strings in the LAMMPS dump file headers
 character(LEN=80), dimension(4) :: headertext

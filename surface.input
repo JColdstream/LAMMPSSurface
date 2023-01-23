@@ -1,10 +1,11 @@
 ! Input file for analysis.f90
 
 ../LAMMPSSurface/npt.e1812.lammpstrj
-hdist.dat                       Output file name
 masses.in                       Mass file (copy from LAMMPS data file)
+scattering_lengths.in           Scattering lengths of different atom types
 500                             Number of frames in trajectory 
 400                             Skip frames
 16                              Number of atom types
-1                               Bin width
+0.01                               Bin width
 3                               Axis (x(1), y(2), z(3)) calculates density along this axis
+1                               Fractional coordinates? (0/1)
