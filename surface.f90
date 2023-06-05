@@ -8,7 +8,7 @@ call start
 do frame = 1, nframecalc
   if (mod(frame, 50) .eq. 0) write(*,*) frame
     call readheader
-    call readcoordinates
+    call readcoordinates 
     call heightdistribution
 enddo
 close(trajf)
@@ -235,8 +235,9 @@ subroutine distribution_output
   do i = 1, nbins
     write(concf, '(f10.3, 999(e15.6))') (binwidth*(dble(i)-0.5)), &
       (hdist(j, i)/binvolume/hdistnrm, j = 1, ntypes)
+    ! density in kg m^{-3}
     write(densf, '(f10.3, 999(e15.6))') (binwidth*(dble(i)-0.5)), &
-      (hdist(j, i)*mass(j)/binvolume/hdistnrm, j = 1, ntypes)
+      (hdist(j, i)*mass(j)*10**4/6.022/binvolume/hdistnrm, j = 1, ntypes)
     write(sldf, '(f10.3, 999(e15.6))') (binwidth*(dble(i)-0.5)), &
       (hdist(j, i)*b(j)/binvolume/hdistnrm, j = 1, ntypes)
   enddo
